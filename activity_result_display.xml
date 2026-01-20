@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/tvStatusHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verification Success"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#4CAF50"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:elevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView android:id="@+id/tvVisitorName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Name: Loading..." />
+            <TextView android:id="@+id/tvPlateNo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Plate: Loading..." />
+            <TextView android:id="@+id/tvStayDuration" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Duration: --" android:textColor="#FF0000" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnConfirmAction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Confirm Check-Out" />
+</LinearLayout>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "582121378204",
+    "project_id": "vpass-f846b",
+    "storage_bucket": "vpass-f846b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582121378204:android:2dc923b84a5b5d8ea9b859",
+        "android_client_info": {
+          "package_name": "com.example.vpass"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSualfMaAWLylZyWJX-7-YhGQlU3NTt6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
