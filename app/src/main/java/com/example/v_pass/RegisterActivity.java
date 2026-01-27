@@ -9,11 +9,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class RegisterActivity extends AppCompatActivity {
 
     EditText etName, etIC, etPhone, etVehicle, etPurpose;
     Button btnGenerateQR;
-    DBHelper dbHelper;
+
+    DatabaseReference visitorRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +32,9 @@ public class RegisterActivity extends AppCompatActivity {
         etPurpose = findViewById(R.id.etPurpose);
         btnGenerateQR = findViewById(R.id.btnGenerateQR);
 
-        dbHelper = new DBHelper(this);
+        // Firebase reference
+        visitorRef = FirebaseDatabase.getInstance().getReference("visitors");
 
-        // Button click
         btnGenerateQR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,38 +44,48 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerVisitor() {
-        // Ambil input
+
         String name = etName.getText().toString().trim();
         String ic = etIC.getText().toString().trim();
         String phone = etPhone.getText().toString().trim();
         String vehicle = etVehicle.getText().toString().trim();
         String purpose = etPurpose.getText().toString().trim();
 
-        // Simple validation
         if (name.isEmpty() || ic.isEmpty() || phone.isEmpty() || purpose.isEmpty()) {
             Toast.makeText(this, "Please fill all required fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Generate QR data (simple string)
+        // Generate QR data
         String qrData = "VP-" + System.currentTimeMillis();
+        long timestamp = System.currentTimeMillis();
 
-        // Timestamp
-        String timestamp = String.valueOf(System.currentTimeMillis());
+        // Create object
+        Visitor visitor = new Visitor(
+                name,
+                ic,
+                phone,
+                vehicle,
+                purpose,
+                qrData,
+                "ACTIVE",
+                timestamp
+        );
 
-        // Insert to DB
-        boolean success = dbHelper.insertVisitor(name, ic, phone, vehicle, purpose, qrData, timestamp);
+        // Save to Firebase
+        visitorRef.child(qrData).setValue(visitor)
+                .addOnSuccessListener(unused -> {
 
-        if (success) {
-            Toast.makeText(this, "Visitor Registered!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Visitor Registered!", Toast.LENGTH_SHORT).show();
 
-            // Move to QRActivity
-            Intent intent = new Intent(RegisterActivity.this, QRActivity.class);
-            intent.putExtra("qrData", qrData);
-            intent.putExtra("visitorName", name);
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, "Registration Failed!", Toast.LENGTH_SHORT).show();
-        }
+                    Intent intent = new Intent(RegisterActivity.this, QRActivity.class);
+                    intent.putExtra("qrData", qrData);
+                    intent.putExtra("visitorName", name);
+                    startActivity(intent);
+
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Registration Failed!", Toast.LENGTH_SHORT).show()
+                );
     }
 }

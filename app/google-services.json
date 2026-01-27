@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "315026435872",
+    "project_id": "v-pass-d85c7",
+    "storage_bucket": "v-pass-d85c7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:315026435872:android:3b97e00e750ebc0e2d7145",
+        "android_client_info": {
+          "package_name": "com.example.v_pass"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWDf6UjRDcdC4QUWGHtMV_0fd6CHPk5yY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

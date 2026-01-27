@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -40,6 +41,7 @@ dependencies {
     implementation(libs.constraintlayout)
     // QR Code Scanner
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
+    implementation("com.google.firebase:firebase-database:20.3.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
