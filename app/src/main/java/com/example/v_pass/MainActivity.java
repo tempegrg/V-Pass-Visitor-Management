@@ -1,4 +1,4 @@
-package com.example.vpass;
+package com.example.v_pass;
 
 import android.os.Bundle;
 

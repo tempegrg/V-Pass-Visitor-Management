@@ -19,6 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "VPASS"
+rootProject.name = "V-Pass"
 include(":app")
- 
