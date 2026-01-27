@@ -4,41 +4,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="16dp">
+    android:padding="20dp">
 
-    <!-- Title -->
     <TextView
-        android:id="@+id/tvTitle"
+        android:id="@+id/tvShowName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Visitor QR Code"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-    <!-- QR Image -->
     <ImageView
-        android:id="@+id/imgQRCode"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:contentDescription="QR Code Image"
-        android:layout_marginBottom="16dp" />
+        android:id="@+id/ivQRCode"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp" />
 
-    <!-- Instruction -->
     <TextView
-        android:id="@+id/tvInstruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please show this QR code to the guard for verification."
-        android:textAlignment="center"
-        android:textSize="14sp"
-        android:layout_marginBottom="24dp" />
-
-    <!-- Back Button -->
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Back to Registration" />
+        android:text="Show this QR Code to the security"
+        android:layout_marginTop="10dp" />
 
 </LinearLayout>

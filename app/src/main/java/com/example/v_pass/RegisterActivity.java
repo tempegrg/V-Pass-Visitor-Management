@@ -1,14 +1,12 @@
 package com.example.v_pass;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -16,7 +14,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText etName, etIC, etPhone, etVehicle, etPurpose;
     Button btnGenerateQR;
-
     DatabaseReference visitorRef;
 
     @Override
@@ -24,7 +21,6 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Link UI
         etName = findViewById(R.id.etVisitorName);
         etIC = findViewById(R.id.etVisitorIC);
         etPhone = findViewById(R.id.etPhone);
@@ -32,19 +28,14 @@ public class RegisterActivity extends AppCompatActivity {
         etPurpose = findViewById(R.id.etPurpose);
         btnGenerateQR = findViewById(R.id.btnGenerateQR);
 
-        // Firebase reference
-        visitorRef = FirebaseDatabase.getInstance().getReference("visitors");
+        // GANTI URL INI dengan URL dari Firebase Console awak
+        String dbUrl = "https://v-pass-d85c7-default-rtdb.firebaseio.com/";
+        visitorRef = FirebaseDatabase.getInstance(dbUrl).getReference("visitors");
 
-        btnGenerateQR.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                registerVisitor();
-            }
-        });
+        btnGenerateQR.setOnClickListener(view -> registerVisitor());
     }
 
     private void registerVisitor() {
-
         String name = etName.getText().toString().trim();
         String ic = etIC.getText().toString().trim();
         String phone = etPhone.getText().toString().trim();
@@ -52,40 +43,25 @@ public class RegisterActivity extends AppCompatActivity {
         String purpose = etPurpose.getText().toString().trim();
 
         if (name.isEmpty() || ic.isEmpty() || phone.isEmpty() || purpose.isEmpty()) {
-            Toast.makeText(this, "Please fill all required fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill in all the information", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Generate QR data
         String qrData = "VP-" + System.currentTimeMillis();
-        long timestamp = System.currentTimeMillis();
+        Visitor visitor = new Visitor(name, ic, phone, vehicle, purpose, qrData, "ACTIVE", System.currentTimeMillis());
 
-        // Create object
-        Visitor visitor = new Visitor(
-                name,
-                ic,
-                phone,
-                vehicle,
-                purpose,
-                qrData,
-                "ACTIVE",
-                timestamp
-        );
-
-        // Save to Firebase
+        // Simpan ke Firebase
         visitorRef.child(qrData).setValue(visitor)
                 .addOnSuccessListener(unused -> {
-
-                    Toast.makeText(this, "Visitor Registered!", Toast.LENGTH_SHORT).show();
-
+                    Log.d("FIREBASE_SUCCESS", "Data masuk!");
                     Intent intent = new Intent(RegisterActivity.this, QRActivity.class);
                     intent.putExtra("qrData", qrData);
                     intent.putExtra("visitorName", name);
                     startActivity(intent);
-
                 })
-                .addOnFailureListener(e ->
-                        Toast.makeText(this, "Registration Failed!", Toast.LENGTH_SHORT).show()
-                );
+                .addOnFailureListener(e -> {
+                    Log.e("FIREBASE_ERROR", "Sebab: " + e.getMessage());
+                    Toast.makeText(this, "Gagal: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                });
     }
 }
