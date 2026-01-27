@@ -2,80 +2,87 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#F8F9FA">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/visitor_registration"
-            android:textSize="22sp"
+            android:text="Visitor Registration"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:layout_gravity="center"
-            android:paddingBottom="16dp" />
+            android:paddingBottom="24dp"
+            android:textColor="#333333" />
 
-        <!-- Visitor Name -->
         <EditText
             android:id="@+id/etVisitorName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_name"
+            android:hint="Full Name"
             android:inputType="textPersonName"
             android:autofillHints="name"
             android:layout_marginBottom="12dp" />
 
-        <!-- IC / Passport -->
         <EditText
             android:id="@+id/etVisitorIC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_ic"
+            android:hint="IC / Passport Number"
             android:inputType="text"
             android:autofillHints="username"
             android:layout_marginBottom="12dp" />
 
-        <!-- Phone Number -->
         <EditText
             android:id="@+id/etPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_phone"
+            android:hint="Phone Number"
             android:inputType="phone"
             android:autofillHints="phone"
             android:layout_marginBottom="12dp" />
 
-        <!-- Vehicle Number -->
         <EditText
             android:id="@+id/etVehicle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_vehicle"
+            android:hint="Vehicle Plate Number (Optional)"
             android:inputType="textCapCharacters"
-            android:autofillHints="vehicle_number"
+            android:autofillHints="none"
             android:layout_marginBottom="12dp" />
 
-        <!-- Purpose -->
         <EditText
             android:id="@+id/etPurpose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_purpose"
+            android:hint="Purpose of Visit"
             android:inputType="textMultiLine"
             android:minLines="2"
             android:autofillHints="none"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="30dp" />
 
-        <!-- Generate QR Button -->
         <Button
             android:id="@+id/btnGenerateQR"
             android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Generate Visitor Pass"
+            android:backgroundTint="#6200EE"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btn_generate_qr" />
+            android:text="Logout"
+            android:backgroundTint="#B00020"
+            android:textColor="@android:color/white"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Dialog.Flush" />
 
     </LinearLayout>
 </ScrollView>
