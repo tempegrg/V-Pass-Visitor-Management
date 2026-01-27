@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/visitor_registration"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:paddingBottom="16dp" />
+
+        <!-- Visitor Name -->
+        <EditText
+            android:id="@+id/etVisitorName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_name"
+            android:inputType="textPersonName"
+            android:autofillHints="name"
+            android:layout_marginBottom="12dp" />
+
+        <!-- IC / Passport -->
+        <EditText
+            android:id="@+id/etVisitorIC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_ic"
+            android:inputType="text"
+            android:autofillHints="username"  <!-- treat as ID number -->
+        android:layout_marginBottom="12dp" />
+
+        <!-- Phone Number -->
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_phone"
+            android:inputType="phone"
+            android:autofillHints="phone"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Vehicle Number -->
+        <EditText
+            android:id="@+id/etVehicle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_vehicle"
+            android:inputType="textCapCharacters"
+            android:autofillHints="vehicle_number" <!-- custom hint -->
+        android:layout_marginBottom="12dp" />
+
+        <!-- Purpose -->
+        <EditText
+            android:id="@+id/etPurpose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_purpose"
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:autofillHints="none"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Generate QR Button -->
+        <Button
+            android:id="@+id/btnGenerateQR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_generate_qr" />
+
+    </LinearLayout>
+</ScrollView>
