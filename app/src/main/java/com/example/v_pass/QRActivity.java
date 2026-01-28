@@ -13,7 +13,7 @@ public class QRActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qr);
+        setContentView(R.layout.activity_qr); // Ensure file is activity_qr.xml
 
         ImageView ivQR = findViewById(R.id.ivQRCode);
         TextView tvName = findViewById(R.id.tvShowName);
@@ -21,11 +21,10 @@ public class QRActivity extends AppCompatActivity {
         String qrData = getIntent().getStringExtra("qrData");
         String visitorName = getIntent().getStringExtra("visitorName");
 
-        tvName.setText("Pass for: " + visitorName);
+        tvName.setText("Visitor Pass: " + visitorName);
 
         try {
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-            // Jana Bitmap dari String
             Bitmap bitmap = barcodeEncoder.encodeBitmap(qrData, BarcodeFormat.QR_CODE, 500, 500);
             ivQR.setImageBitmap(bitmap);
         } catch (Exception e) {

@@ -7,14 +7,16 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
     EditText etName, etIC, etPhone, etVehicle, etPurpose;
-    Button btnGenerateQR;
+    Button btnGenerateQR, btnLogout;
     DatabaseReference visitorRef;
+    DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +29,20 @@ public class RegisterActivity extends AppCompatActivity {
         etVehicle = findViewById(R.id.etVehicle);
         etPurpose = findViewById(R.id.etPurpose);
         btnGenerateQR = findViewById(R.id.btnGenerateQR);
+        btnLogout = findViewById(R.id.btnLogout);
 
-        // GANTI URL INI dengan URL dari Firebase Console awak
+        dbHelper = new DBHelper(this);
         String dbUrl = "https://v-pass-d85c7-default-rtdb.firebaseio.com/";
         visitorRef = FirebaseDatabase.getInstance(dbUrl).getReference("visitors");
 
         btnGenerateQR.setOnClickListener(view -> registerVisitor());
+
+        btnLogout.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+            finish();
+        });
     }
 
     private void registerVisitor() {
@@ -43,25 +53,23 @@ public class RegisterActivity extends AppCompatActivity {
         String purpose = etPurpose.getText().toString().trim();
 
         if (name.isEmpty() || ic.isEmpty() || phone.isEmpty() || purpose.isEmpty()) {
-            Toast.makeText(this, "Please fill in all the information", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill in all required fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
         String qrData = "VP-" + System.currentTimeMillis();
-        Visitor visitor = new Visitor(name, ic, phone, vehicle, purpose, qrData, "ACTIVE", System.currentTimeMillis());
+        long timestamp = System.currentTimeMillis();
+        Visitor visitor = new Visitor(name, ic, phone, vehicle, purpose, qrData, "ACTIVE", timestamp);
 
-        // Simpan ke Firebase
-        visitorRef.child(qrData).setValue(visitor)
-                .addOnSuccessListener(unused -> {
-                    Log.d("FIREBASE_SUCCESS", "Data masuk!");
-                    Intent intent = new Intent(RegisterActivity.this, QRActivity.class);
-                    intent.putExtra("qrData", qrData);
-                    intent.putExtra("visitorName", name);
-                    startActivity(intent);
-                })
-                .addOnFailureListener(e -> {
-                    Log.e("FIREBASE_ERROR", "Sebab: " + e.getMessage());
-                    Toast.makeText(this, "Gagal: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                });
+        // Save Online
+        visitorRef.child(qrData).setValue(visitor).addOnSuccessListener(unused -> {
+            // Save Offline
+            dbHelper.insertVisitor(name, ic, phone, vehicle, purpose, qrData, String.valueOf(timestamp));
+
+            Intent intent = new Intent(RegisterActivity.this, QRActivity.class);
+            intent.putExtra("qrData", qrData);
+            intent.putExtra("visitorName", name);
+            startActivity(intent);
+        }).addOnFailureListener(e -> Log.e("FIREBASE_ERROR", e.getMessage()));
     }
 }
