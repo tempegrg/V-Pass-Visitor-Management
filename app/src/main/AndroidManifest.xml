@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:theme="@style/Theme.VPass">
 
         <activity
@@ -27,6 +23,10 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".QRActivity" />
-    </application>
 
+        <activity android:name=".GuardActivity" />
+        <activity android:name=".GuardScanActivity" android:screenOrientation="portrait" />
+        <activity android:name=".EntryLogActivity" />
+
+    </application>
 </manifest>

@@ -7,7 +7,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnVisitorEntry;
+    Button btnVisitorEntry, btnGuardEntry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,10 +15,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnVisitorEntry = findViewById(R.id.btnVisitorEntry);
+        btnGuardEntry = findViewById(R.id.btnGuardEntry);
 
+        // Visitor path
         btnVisitorEntry.setOnClickListener(v -> {
-            // First step in the flow: Go to Login
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.putExtra("user_role", "visitor");
+            startActivity(intent);
+        });
+
+        // Guard path
+        btnGuardEntry.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.putExtra("user_role", "guard");
+            startActivity(intent);
         });
     }
 }

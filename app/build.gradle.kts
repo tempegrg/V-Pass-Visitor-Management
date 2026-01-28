@@ -42,6 +42,8 @@ dependencies {
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
     implementation ("com.google.firebase:firebase-auth:22.3.1")
     implementation("com.google.firebase:firebase-database:20.3.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("androidx.cardview:cardview:1.0.0")
     implementation(libs.firebase.auth)
     implementation(libs.credentials)
     implementation(libs.credentials.play.services.auth)

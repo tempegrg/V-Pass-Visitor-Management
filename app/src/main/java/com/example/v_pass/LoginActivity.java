@@ -27,11 +27,6 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         tvGoToRegister = findViewById(R.id.tvGoToRegister);
 
-        // Auto-login logic
-        if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-            finish();
-        }
 
         btnLogin.setOnClickListener(v -> {
             String email = etEmail.getText().toString().trim();
@@ -44,15 +39,27 @@ public class LoginActivity extends AppCompatActivity {
 
             mAuth.signInWithEmailAndPassword(email, pass)
                     .addOnSuccessListener(authResult -> {
-                        Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                        // Ambil email terus dari authResult (lebih tepat)
+                        String loggedInEmail = authResult.getUser().getEmail();
+                        String role = getIntent().getStringExtra("user_role");
+
+                        // --- FIX 2: REDIRECT LOGIC ---
+                        if (loggedInEmail != null && (loggedInEmail.equals("admin@vpass.com") || "guard".equals(role))) {
+                            // Hantar ke Guard Dashboard (GuardActivity), bukan terus ke scanner
+                            startActivity(new Intent(LoginActivity.this, GuardActivity.class));
+                        } else {
+                            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                        }
                         finish();
                     })
-                    .addOnFailureListener(e -> Toast.makeText(this, "Login Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                    .addOnFailureListener(e -> {
+                        // --- FIX 3: ADD FAILURE LISTENER ---
+                        // Ini penting! Kalau login gagal, awak akan nampak SEBABnya (cth: akaun tak wujud)
+                        Toast.makeText(LoginActivity.this, "Login Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    });
         });
 
         tvGoToRegister.setOnClickListener(v -> {
-            // New user must sign up first
             startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
         });
     }
