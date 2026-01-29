@@ -558,7 +558,31 @@
       <option name="project" value="LOCAL" />
       <updated>1769700639055</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Update ada Team Members">
+      <option name="closed" value="true" />
+      <created>1769714828060</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1769714828060</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Update ada Team Members">
+      <option name="closed" value="true" />
+      <created>1769714839179</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1769714839179</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Update ada Team Members">
+      <option name="closed" value="true" />
+      <created>1769714878562</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1769714878562</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -595,7 +619,8 @@
     <MESSAGE value="Tambah guard navigation bar" />
     <MESSAGE value="Update Baru Pukul 9.35pm" />
     <MESSAGE value="Update Latest 11pm" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Latest 11pm" />
+    <MESSAGE value="Update ada Team Members" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update ada Team Members" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">

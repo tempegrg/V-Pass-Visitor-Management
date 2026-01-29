@@ -2,19 +2,15 @@ package com.example.v_pass;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.LinearLayout;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import com.google.android.material.navigation.NavigationView;
 
 public class TeamActivity extends AppCompatActivity {
@@ -40,18 +36,17 @@ public class TeamActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        // 3. Creative Animation Logic
+        // 3. Apply Creative Staggered Animation to Cards
         LinearLayout container = findViewById(R.id.teamContainer);
         Animation slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up);
         LayoutAnimationController controller = new LayoutAnimationController(slideUp);
-        controller.setDelay(0.2f); // Staggered appearance
+        controller.setDelay(0.2f); // Cards will appear one after another
         container.setLayoutAnimation(controller);
 
-        // 4. Sidebar Menu Functionality
+        // 4. Sidebar Menu Functionality (All buttons fixed)
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
 
-            // Handle Navigation
             if (id == R.id.nav_home) {
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
@@ -62,7 +57,14 @@ public class TeamActivity extends AppCompatActivity {
                 startActivity(new Intent(this, SignUpActivity.class));
                 finish();
             } else if (id == R.id.nav_team) {
-                // Already here, just close drawer
+                drawerLayout.closeDrawer(GravityCompat.START);
+            } else if (id == R.id.nav_about) {
+                // FIXED: Now navigates to About Us
+                startActivity(new Intent(this, AboutUsActivity.class));
+                finish();
+            } else if (id == R.id.nav_logout) {
+                // FIXED: Exits the application
+                finishAffinity();
             }
 
             drawerLayout.closeDrawer(GravityCompat.START);
@@ -76,7 +78,7 @@ public class TeamActivity extends AppCompatActivity {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
-            // Optional: Smooth fade out when leaving
+            // Smooth transition back
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
     }

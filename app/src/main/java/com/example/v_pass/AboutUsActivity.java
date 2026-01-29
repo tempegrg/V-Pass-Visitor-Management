@@ -20,11 +20,9 @@ public class AboutUsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
 
-        // 1. Setup Toolbar
         Toolbar toolbar = findViewById(R.id.toolbarAbout);
         setSupportActionBar(toolbar);
 
-        // 2. Setup the Drawer
         drawerLayout = findViewById(R.id.drawer_layout_about);
         navigationView = findViewById(R.id.nav_view_about);
 
@@ -33,7 +31,7 @@ public class AboutUsActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        // 3. Navigation Sidebar Menu Logic
+        // Navigation Sidebar Menu Logic (FULLY UPDATED)
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
 
@@ -42,17 +40,23 @@ public class AboutUsActivity extends AppCompatActivity {
                 finish();
             } else if (id == R.id.nav_login) {
                 startActivity(new Intent(this, LoginActivity.class));
+                finish();
             } else if (id == R.id.nav_register) {
                 startActivity(new Intent(this, SignUpActivity.class));
+                finish();
+            } else if (id == R.id.nav_team) {
+                startActivity(new Intent(this, TeamActivity.class));
+                finish();
             } else if (id == R.id.nav_about) {
                 drawerLayout.closeDrawer(GravityCompat.START);
+            } else if (id == R.id.nav_logout) {
+                finishAffinity();
             }
 
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
 
-        // Handle Back Button
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
