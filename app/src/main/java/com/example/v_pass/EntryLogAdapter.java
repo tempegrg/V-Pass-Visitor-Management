@@ -22,7 +22,6 @@ public class EntryLogAdapter extends RecyclerView.Adapter<EntryLogAdapter.LogVie
     @NonNull
     @Override
     public LogViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // PASTIKAN nama fail XML ini betul: item_entry_log
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_entry_log, parent, false);
         return new LogViewHolder(view);
     }
@@ -30,11 +29,10 @@ public class EntryLogAdapter extends RecyclerView.Adapter<EntryLogAdapter.LogVie
     @Override
     public void onBindViewHolder(@NonNull LogViewHolder holder, int position) {
         EntryLog log = logList.get(position);
-        holder.tvName.setText("Visitor: " + log.name);
+        holder.tvName.setText(log.name);
         holder.tvVehicle.setText("Vehicle: " + log.vehicle);
 
-        // Formatkan timestamp ke tarikh yang boleh dibaca
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy, hh:mm a", Locale.getDefault());
         holder.tvTime.setText(sdf.format(new Date(log.timestamp)));
     }
 
@@ -48,7 +46,6 @@ public class EntryLogAdapter extends RecyclerView.Adapter<EntryLogAdapter.LogVie
 
         public LogViewHolder(@NonNull View itemView) {
             super(itemView);
-            // PASTIKAN ID ini wujud dalam item_entry_log.xml
             tvName = itemView.findViewById(R.id.tvLogName);
             tvVehicle = itemView.findViewById(R.id.tvLogVehicle);
             tvTime = itemView.findViewById(R.id.tvLogTime);

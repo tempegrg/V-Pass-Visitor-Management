@@ -3,30 +3,37 @@ package com.example.v_pass;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText etEmail, etPassword;
-    Button btnLogin;
-    TextView tvGoToRegister;
-    FirebaseAuth mAuth;
+    private EditText etEmail, etPassword;
+    private MaterialButton btnLogin;
+    private TextView tvGoToRegister;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();
+
+        // Initialize Views
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         tvGoToRegister = findViewById(R.id.tvGoToRegister);
 
+        // Get the role passed from MainActivity
+        final String role = getIntent().getStringExtra("user_role");
 
         btnLogin.setOnClickListener(v -> {
             String email = etEmail.getText().toString().trim();
@@ -37,25 +44,34 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
+            // Disable button to prevent double-clicks
+            btnLogin.setEnabled(false);
+            btnLogin.setText("Logging in...");
+
             mAuth.signInWithEmailAndPassword(email, pass)
                     .addOnSuccessListener(authResult -> {
-                        // Ambil email terus dari authResult (lebih tepat)
                         String loggedInEmail = authResult.getUser().getEmail();
-                        String role = getIntent().getStringExtra("user_role");
 
-                        // --- FIX 2: REDIRECT LOGIC ---
-                        if (loggedInEmail != null && (loggedInEmail.equals("admin@vpass.com") || "guard".equals(role))) {
-                            // Hantar ke Guard Dashboard (GuardActivity), bukan terus ke scanner
+                        // Debug log to see what's happening in Logcat
+                        Log.d("LOGIN_DEBUG", "Email: " + loggedInEmail + " | Role: " + role);
+
+                        // REDIRECT LOGIC
+                        // 1. Check if it's the admin email
+                        // 2. OR check if the intent role is "guard"
+                        if (loggedInEmail != null && (loggedInEmail.equals("admin@vpass.com") || "guard".equalsIgnoreCase(role))) {
                             startActivity(new Intent(LoginActivity.this, GuardActivity.class));
                         } else {
+                            // Default for visitors
                             startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                         }
-                        finish();
+
+                        finish(); // Close LoginActivity
                     })
                     .addOnFailureListener(e -> {
-                        // --- FIX 3: ADD FAILURE LISTENER ---
-                        // Ini penting! Kalau login gagal, awak akan nampak SEBABnya (cth: akaun tak wujud)
-                        Toast.makeText(LoginActivity.this, "Login Failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        // Re-enable button on failure
+                        btnLogin.setEnabled(true);
+                        btnLogin.setText("LOGIN");
+                        Toast.makeText(LoginActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                     });
         });
 

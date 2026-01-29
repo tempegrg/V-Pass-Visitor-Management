@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+// IMPORTANT IMPORTS
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -14,7 +16,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegisterActivity extends AppCompatActivity {
 
     EditText etName, etIC, etPhone, etVehicle, etPurpose;
-    Button btnGenerateQR, btnLogout;
+    MaterialButton btnGenerateQR;
+    TextView btnLogout; // Changed to TextView to match your XML
     DatabaseReference visitorRef;
     DBHelper dbHelper;
 
@@ -39,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         btnLogout.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
-            Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Returning to Home", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(RegisterActivity.this, MainActivity.class));
             finish();
         });
@@ -61,11 +64,8 @@ public class RegisterActivity extends AppCompatActivity {
         long timestamp = System.currentTimeMillis();
         Visitor visitor = new Visitor(name, ic, phone, vehicle, purpose, qrData, "ACTIVE", timestamp);
 
-        // Save Online
         visitorRef.child(qrData).setValue(visitor).addOnSuccessListener(unused -> {
-            // Save Offline
             dbHelper.insertVisitor(name, ic, phone, vehicle, purpose, qrData, String.valueOf(timestamp));
-
             Intent intent = new Intent(RegisterActivity.this, QRActivity.class);
             intent.putExtra("qrData", qrData);
             intent.putExtra("visitorName", name);

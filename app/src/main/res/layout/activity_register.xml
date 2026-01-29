@@ -7,11 +7,11 @@
     android:background="#F0F4F7">
 
     <View
-    android:id="@+id/headerBackground"
-    android:layout_width="match_parent"
-    android:layout_height="240dp"
-    android:background="#1A237E"
-    app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/headerBackground"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:background="#1A237E"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,14 +24,23 @@
             android:orientation="vertical"
             android:padding="24dp">
 
+            <ImageView
+                android:id="@+id/ivAppLogo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/indahsayang"
+                android:contentDescription="Indah Sayang Logo" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Visitor Entry"
                 android:textColor="#FFFFFF"
-                android:textSize="32sp"
+                android:textSize="28sp"
                 android:fontFamily="sans-serif-black"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="12dp"
                 android:layout_gravity="center" />
 
             <TextView
@@ -42,7 +51,7 @@
                 android:textSize="14sp"
                 android:letterSpacing="0.1"
                 android:layout_gravity="center"
-                android:layout_marginBottom="30dp" />
+                android:layout_marginBottom="25dp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -164,16 +173,31 @@
                         app:elevation="4dp" />
 
                     <TextView
+                        android:id="@+id/tvGoToLogin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#1E88E5"
+                        android:textSize="14sp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:padding="5dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground" />
+
+                    <TextView
                         android:id="@+id/btnLogout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="LOGOUT SESSION"
+                        android:text="BACK TO MAIN"
                         android:textColor="#E53935"
                         android:textSize="13sp"
                         android:textStyle="bold"
                         android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:padding="10dp"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:background="?attr/selectableItemBackground" />
 
                 </LinearLayout>

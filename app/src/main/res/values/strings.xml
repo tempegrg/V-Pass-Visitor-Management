@@ -1,5 +1,19 @@
 <resources>
     <string name="app_name">V-PASS</string>
+
+    <string name="brand_title">V-PASS</string>
+    <string name="brand_subtitle">RESIDENTIAL MANAGEMENT</string>
+    <string name="welcome_msg">Welcome. Please select your portal.</string>
+    <string name="btn_visitor_portal">VISITOR PORTAL</string>
+    <string name="btn_guard_login_main">GUARD LOGIN</string>
+    <string name="authorized_only">Authorized Personnel Only</string>
+
+    <string name="login_title">GUARD LOGIN</string>
+    <string name="hint_email">Email Address</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="no_account">Tiada akaun? Daftar di sini</string>
+
     <string name="visitor_registration">Visitor Registration</string>
     <string name="hint_name">Visitor Name</string>
     <string name="hint_ic">IC / Passport Number</string>
@@ -7,4 +21,20 @@
     <string name="hint_vehicle">Vehicle Number</string>
     <string name="hint_purpose">Purpose of Visit</string>
     <string name="btn_generate_qr">Generate QR Code</string>
+
+    <string name="guard_console">GUARD CONSOLE</string>
+    <string name="select_op">Select Operation</string>
+    <string name="btn_scan_qr">START QR SCANNER</string>
+    <string name="btn_view_logs">VIEW ENTRY LOGS</string>
+    <string name="btn_logout">LOGOUT SYSTEM</string>
+    <string name="system_active">● SYSTEM ACTIVE</string>
+
+    <string name="security_pass">SECURITY PASS</string>
+    <string name="auth_visitor">AUTHORIZED VISITOR</string>
+    <string name="scan_at_post">PRESENT AT GUARD POST</string>
+
+    <string name="visitor_logs">VISITOR LOGS</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

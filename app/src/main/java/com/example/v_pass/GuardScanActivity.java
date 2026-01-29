@@ -1,9 +1,12 @@
-package com.example.v_pass; // Fixed package name to match your other files
+package com.example.v_pass;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.journeyapps.barcodescanner.BarcodeCallback;
@@ -15,18 +18,36 @@ public class GuardScanActivity extends AppCompatActivity {
 
     private DecoratedBarcodeView barcodeView;
     private DatabaseReference visitorRef, logRef;
+    private MaterialButton btnBack; // Declare the button
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guard_scan);
 
+        // Initialize Views
         barcodeView = findViewById(R.id.barcodeScanner);
+        btnBack = findViewById(R.id.btnBack);
 
         // Standardizing the database URL
         String dbUrl = "https://v-pass-d85c7-default-rtdb.firebaseio.com/";
         visitorRef = FirebaseDatabase.getInstance(dbUrl).getReference("visitors");
         logRef = FirebaseDatabase.getInstance(dbUrl).getReference("entry_logs");
+
+        // 1. Handle "CANCEL SCAN" Button Click
+        btnBack.setOnClickListener(v -> {
+            barcodeView.pause();
+            finish(); // Closes the scanner and goes back to Guard Dashboard
+        });
+
+        // 2. Handle System Back Button (Modern Way)
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                barcodeView.pause();
+                finish();
+            }
+        });
 
         barcodeView.decodeContinuous(callback);
     }
@@ -34,14 +55,13 @@ public class GuardScanActivity extends AppCompatActivity {
     private final BarcodeCallback callback = new BarcodeCallback() {
         @Override
         public void barcodeResult(BarcodeResult result) {
-            barcodeView.pause(); // Pause to prevent multiple scans
+            barcodeView.pause(); // Pause to prevent duplicate scans
             verifyQR(result.getText());
         }
     };
 
     private void verifyQR(String qrData) {
         visitorRef.child(qrData).get().addOnSuccessListener(snapshot -> {
-
             if (!snapshot.exists()) {
                 showFailDialog("Invalid QR: Record not found.");
                 return;
@@ -49,21 +69,18 @@ public class GuardScanActivity extends AppCompatActivity {
 
             String status = snapshot.child("status").getValue(String.class);
 
-            // Check if QR is still active
             if (!"ACTIVE".equals(status)) {
                 showFailDialog("Access Denied: QR already used or expired.");
                 return;
             }
 
             String name = snapshot.child("name").getValue(String.class);
-
-            // FIXED: Changed "plate" to "vehicle" to match your RegisterActivity
             String vehicle = snapshot.child("vehicle").getValue(String.class);
 
             showSuccessDialog(qrData, name, vehicle);
 
         }).addOnFailureListener(e -> {
-            Toast.makeText(this, "Database error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Database error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             barcodeView.resume();
         });
     }
@@ -83,7 +100,7 @@ public class GuardScanActivity extends AppCompatActivity {
 
         builder.setNegativeButton("CANCEL", (dialog, which) -> {
             dialog.dismiss();
-            barcodeView.resume();
+            barcodeView.resume(); // Resume scanning if guard cancels the dialog
         });
 
         builder.setCancelable(false);
@@ -106,10 +123,8 @@ public class GuardScanActivity extends AppCompatActivity {
     }
 
     private void checkInVisitor(String qrId, String name, String vehicle) {
-        // 1. Update status to CHECKED_IN (QR cannot be used again)
         visitorRef.child(qrId).child("status").setValue("CHECKED_IN");
 
-        // 2. Create entry log for EntryLogActivity
         HashMap<String, Object> log = new HashMap<>();
         log.put("name", name);
         log.put("vehicle", vehicle);
