@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private CardView cardVisitor, cardGuard;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private long backPressedTime; // For double-tap exit logic
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +39,25 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        // 3. Handle Back Button (Close drawer if open)
+        // 3. Handle Back Button (Close drawer or Exit app)
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else {
-                    setEnabled(false);
-                    getOnBackPressedDispatcher().onBackPressed();
+                    // Double tap to exit logic
+                    if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                        finishAffinity(); // Close all activities and exit
+                    } else {
+                        Toast.makeText(MainActivity.this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+                    }
+                    backPressedTime = System.currentTimeMillis();
                 }
             }
         });
 
-        // 4. Sidebar Menu Logic
+        // 4. Sidebar Menu Logic (Fixed Logout/Exit)
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
 
@@ -61,18 +68,21 @@ public class MainActivity extends AppCompatActivity {
             } else if (id == R.id.nav_register) {
                 startActivity(new Intent(this, SignUpActivity.class));
             } else if (id == R.id.nav_team) {
-                // Navigate to Team page with creative fade transition
                 startActivity(new Intent(this, TeamActivity.class));
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             } else if (id == R.id.nav_about) {
                 startActivity(new Intent(this, AboutUsActivity.class));
+            } else if (id == R.id.nav_logout) {
+                // THE FIX: This is the exit functionality
+                Toast.makeText(this, "Exiting V-PASS", Toast.LENGTH_SHORT).show();
+                finishAffinity();
             }
 
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
 
-        // 5. Portal Cards
+        // 5. Portal Cards (Dashboard Navigation)
         cardVisitor = findViewById(R.id.cardVisitor);
         cardGuard = findViewById(R.id.cardGuard);
 
