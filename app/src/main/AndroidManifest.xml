@@ -25,6 +25,7 @@
         <activity android:name=".QRActivity" />
         <activity android:name=".AboutUsActivity" />
 
+        <activity android:name=".GuardLoginActivity" />
         <activity android:name=".GuardActivity" />
         <activity android:name=".GuardScanActivity" android:screenOrientation="portrait" />
         <activity android:name=".EntryLogActivity" />

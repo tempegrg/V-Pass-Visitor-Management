@@ -9,7 +9,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // 2. Setup Drawer and Hamburger Toggle
+        // 2. Setup Drawer
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
 
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        // 3. Modern Back Button Handling (Replaces onBackPressed)
+        // 3. Handle Back Button (Tutup drawer kalau terbuka)
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -51,44 +50,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 4. Setup Sidebar Menu Clicks with Debugging
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                Log.d("NAV_DEBUG", "Clicked Item ID: " + id);
-
-                if (id == R.id.nav_home) {
-                    Log.d("NAV_DEBUG", "Home selected");
-                } else if (id == R.id.nav_login) {
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                } else if (id == R.id.nav_register) {
-                    startActivity(new Intent(MainActivity.this, SignUpActivity.class));
-                } else if (id == R.id.nav_about) {
-                    Log.d("NAV_DEBUG", "About Us selected - Starting Activity");
-                    Intent intent = new Intent(MainActivity.this, AboutUsActivity.class);
-                    startActivity(intent);
-                }
-
-                drawerLayout.closeDrawer(GravityCompat.START);
-                return true;
+        // 4. Sidebar Menu Logic
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.nav_login) {
+                startActivity(new Intent(this, LoginActivity.class));
+            } else if (id == R.id.nav_register) {
+                startActivity(new Intent(this, SignUpActivity.class));
             }
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
         });
 
-        // 5. Portal Buttons Logic
+        // 5. Portal Buttons Logic (Pengasingan Utama)
         btnVisitorEntry = findViewById(R.id.btnVisitorEntry);
         btnGuardEntry = findViewById(R.id.btnGuardEntry);
 
         btnVisitorEntry.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            intent.putExtra("user_role", "visitor");
-            startActivity(intent);
+            // Pergi ke Login Biasa (Ada Sign Up)
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
         });
 
         btnGuardEntry.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            intent.putExtra("user_role", "guard");
-            startActivity(intent);
+            // Pergi ke Login Guard (Tiada Sign Up)
+            startActivity(new Intent(MainActivity.this, GuardLoginActivity.class));
         });
     }
 }

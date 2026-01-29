@@ -3,7 +3,6 @@ package com.example.v_pass;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,17 +22,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();
 
-        // Initialize Views
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         tvGoToRegister = findViewById(R.id.tvGoToRegister);
-
-        // Get the role passed from MainActivity
-        final String role = getIntent().getStringExtra("user_role");
 
         btnLogin.setOnClickListener(v -> {
             String email = etEmail.getText().toString().trim();
@@ -44,31 +38,20 @@ public class LoginActivity extends AppCompatActivity {
                 return;
             }
 
-            // Disable button to prevent double-clicks
             btnLogin.setEnabled(false);
             btnLogin.setText("Logging in...");
 
             mAuth.signInWithEmailAndPassword(email, pass)
                     .addOnSuccessListener(authResult -> {
-                        String loggedInEmail = authResult.getUser().getEmail();
+                        // LOGIK BARU: Sesiapa yang login di sini adalah Visitor.
+                        // Terus bawa ke Visitor Dashboard/Home (Contoh: MainActivityVisitor atau DashboardActivity)
+                        Toast.makeText(this, "Welcome to V-PASS", Toast.LENGTH_SHORT).show();
 
-                        // Debug log to see what's happening in Logcat
-                        Log.d("LOGIN_DEBUG", "Email: " + loggedInEmail + " | Role: " + role);
-
-                        // REDIRECT LOGIC
-                        // 1. Check if it's the admin email
-                        // 2. OR check if the intent role is "guard"
-                        if (loggedInEmail != null && (loggedInEmail.equals("admin@vpass.com") || "guard".equalsIgnoreCase(role))) {
-                            startActivity(new Intent(LoginActivity.this, GuardActivity.class));
-                        } else {
-                            // Default for visitors
-                            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-                        }
-
-                        finish(); // Close LoginActivity
+                        // Gantikan 'RegisterActivity.class' dengan page utama Visitor awak nanti
+                        startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                        finish();
                     })
                     .addOnFailureListener(e -> {
-                        // Re-enable button on failure
                         btnLogin.setEnabled(true);
                         btnLogin.setText("LOGIN");
                         Toast.makeText(LoginActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -76,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         tvGoToRegister.setOnClickListener(v -> {
+            // Pergi ke page Sign Up untuk Visitor baru
             startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
         });
     }
