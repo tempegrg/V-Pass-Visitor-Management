@@ -220,7 +220,7 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+    "settings.editor.selected.configurable": "preferences.general"
   },
   "keyToStringList": {
     "GitStage.ChangesTree.GroupingKeys": [
@@ -497,7 +497,23 @@
       <option name="project" value="LOCAL" />
       <updated>1769686287638</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Tambah guard navigation bar">
+      <option name="closed" value="true" />
+      <created>1769691868682</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1769691868682</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Tambah guard navigation bar">
+      <option name="closed" value="true" />
+      <created>1769691872045</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1769691872045</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -531,7 +547,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add Firebase visitor registration feature" />
     <MESSAGE value="Updated Part UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Part UI" />
+    <MESSAGE value="Tambah guard navigation bar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tambah guard navigation bar" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
