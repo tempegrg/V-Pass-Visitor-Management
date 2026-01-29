@@ -18,83 +18,171 @@
             android:layout_height="?attr/actionBarSize"
             android:background="#1A237E"
             app:title="About Us"
-            app:titleTextColor="#FFFFFF" />
+            app:titleTextColor="#FFFFFF"
+            app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="24dp">
+                android:padding="24dp"
+                android:paddingTop="32dp">
 
-                <ImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/indahsayang"
-                    android:layout_marginBottom="16dp"/>
-
-                <TextView
+                <!-- Brand Section -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="V-PASS System"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:textColor="#1A237E"
-                    android:gravity="center"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Version 1.0.0"
+                    android:orientation="vertical"
                     android:gravity="center"
-                    android:textColor="#757575"
-                    android:layout_marginBottom="24dp"/>
+                    android:layout_marginBottom="32dp">
 
-                <TextView
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/indahsayang"
+                        android:layout_marginBottom="16dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="V-PASS"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="#1A237E"
+                        android:letterSpacing="0.1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Visitor Management System"
+                        android:gravity="center"
+                        android:textColor="#757575"
+                        android:layout_marginTop="4dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Version 1.0.0"
+                        android:gravity="center"
+                        android:textColor="#9E9E9E"
+                        android:textSize="12sp"
+                        android:layout_marginTop="8dp"/>
+                </LinearLayout>
+
+                <!-- About Card -->
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Indah Sayang Residential Area Management System. This application provides a seamless experience for visitors to register and guards to verify entries via QR scanning."
-                    android:textSize="16sp"
-                    android:lineSpacingExtra="4dp"
-                    android:textColor="#212121"
-                    android:layout_marginBottom="20dp"/>
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    android:layout_marginBottom="20dp">
 
-                <TextView
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="System Overview"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A237E"
+                            android:layout_marginBottom="12dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Digital visitor management system for Indah Sayang Residential Area. Provides seamless registration and verification via QR technology."
+                            android:textSize="14sp"
+                            android:lineSpacingExtra="4dp"
+                            android:textColor="#424242"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Features Card -->
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Management Office"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="#1A237E"
-                    android:layout_marginBottom="8dp"/>
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    android:layout_marginBottom="20dp">
 
-                <TextView
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Key Features"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A237E"
+                            android:layout_marginBottom="12dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="• Digital Visitor Registration\n• QR Code Generation\n• Real-time Guard Verification\n• Entry Log Management\n• Secure Authentication"
+                            android:textSize="14sp"
+                            android:textColor="#424242"
+                            android:lineSpacingExtra="6dp"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Contact Card -->
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Location: Clubhouse Indah Sayang, Level 1\nOperating Hours: 9:00 AM - 5:00 PM (Mon-Fri)\nContact: +603-1234 5678"
-                    android:textSize="14sp"
-                    android:textColor="#424242"
-                    android:layout_marginBottom="20dp"/>
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Security Features"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="#1A237E"
-                    android:layout_marginBottom="8dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Management Office"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="#1A237E"
+                            android:layout_marginBottom="12dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Location: Clubhouse Indah Sayang\nOperating Hours: 9:00 AM - 5:00 PM (Mon-Fri)\nContact: +603-1234 5678\nEmail: management@indahsayang.com"
+                            android:textSize="14sp"
+                            android:textColor="#424242"
+                            android:lineSpacingExtra="4dp"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Footer -->
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="• 24/7 Gated &amp; Guarded Community\n• Smart QR Access for Visitors\n• Real-time Entry Logging\n• Integrated Guard Scanning App"
-                    android:textSize="14sp"
-                    android:textColor="#424242"/>
+                    android:text="© 2024 Indah Sayang Residential"
+                    android:textSize="12sp"
+                    android:textColor="#9E9E9E"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="16dp"/>
 
             </LinearLayout>
         </ScrollView>
@@ -102,10 +190,12 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view_about"
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_menu" />
+        app:menu="@menu/drawer_menu"
+        app:itemIconTint="#1A237E"
+        app:itemTextColor="#212121" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

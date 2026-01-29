@@ -1,20 +1,21 @@
 package com.example.v_pass;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
 import android.content.Intent;
 import android.os.Bundle;
-import com.google.android.material.button.MaterialButton;
+
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MaterialButton btnVisitorEntry, btnGuardEntry;
+    private CardView cardVisitor, cardGuard;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
@@ -69,15 +70,15 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        // 5. Portal Buttons
-        btnVisitorEntry = findViewById(R.id.btnVisitorEntry);
-        btnGuardEntry = findViewById(R.id.btnGuardEntry);
+        // 5. Portal Cards
+        cardVisitor = findViewById(R.id.cardVisitor);
+        cardGuard = findViewById(R.id.cardGuard);
 
-        btnVisitorEntry.setOnClickListener(v -> {
+        cardVisitor.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         });
 
-        btnGuardEntry.setOnClickListener(v -> {
+        cardGuard.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, GuardLoginActivity.class));
         });
     }
