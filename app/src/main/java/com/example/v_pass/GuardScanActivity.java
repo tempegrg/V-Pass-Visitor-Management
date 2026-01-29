@@ -12,35 +12,39 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
+import com.journeyapps.barcodescanner.camera.CameraSettings; // IMPORT BARU
 import java.util.HashMap;
 
 public class GuardScanActivity extends AppCompatActivity {
 
     private DecoratedBarcodeView barcodeView;
     private DatabaseReference visitorRef, logRef;
-    private MaterialButton btnBack; // Declare the button
+    private MaterialButton btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guard_scan);
 
-        // Initialize Views
         barcodeView = findViewById(R.id.barcodeScanner);
         btnBack = findViewById(R.id.btnBack);
 
-        // Standardizing the database URL
+        // --- TAMBAHAN UNTUK LAJUKAN SCAN ---
+        CameraSettings settings = new CameraSettings();
+        settings.setRequestedCameraId(0); // Guna kamera belakang
+        settings.setAutoFocusEnabled(true); // Paksa auto-focus sentiasa ON
+        barcodeView.getBarcodeView().setCameraSettings(settings);
+        // ------------------------------------
+
         String dbUrl = "https://v-pass-d85c7-default-rtdb.firebaseio.com/";
         visitorRef = FirebaseDatabase.getInstance(dbUrl).getReference("visitors");
         logRef = FirebaseDatabase.getInstance(dbUrl).getReference("entry_logs");
 
-        // 1. Handle "CANCEL SCAN" Button Click
         btnBack.setOnClickListener(v -> {
             barcodeView.pause();
-            finish(); // Closes the scanner and goes back to Guard Dashboard
+            finish();
         });
 
-        // 2. Handle System Back Button (Modern Way)
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -55,7 +59,8 @@ public class GuardScanActivity extends AppCompatActivity {
     private final BarcodeCallback callback = new BarcodeCallback() {
         @Override
         public void barcodeResult(BarcodeResult result) {
-            barcodeView.pause(); // Pause to prevent duplicate scans
+            // Kita pause supaya dia tak scan berkali-kali masa tengah proses
+            barcodeView.pause();
             verifyQR(result.getText());
         }
     };
@@ -100,7 +105,7 @@ public class GuardScanActivity extends AppCompatActivity {
 
         builder.setNegativeButton("CANCEL", (dialog, which) -> {
             dialog.dismiss();
-            barcodeView.resume(); // Resume scanning if guard cancels the dialog
+            barcodeView.resume();
         });
 
         builder.setCancelable(false);
@@ -108,6 +113,8 @@ public class GuardScanActivity extends AppCompatActivity {
     }
 
     private void showFailDialog(String reason) {
+        NotificationHelper.showNotification(this, "⚠️ SECURITY ALERT", reason);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("ACCESS DENIED");
         builder.setMessage(reason);
@@ -132,6 +139,7 @@ public class GuardScanActivity extends AppCompatActivity {
 
         logRef.push().setValue(log)
                 .addOnSuccessListener(aVoid -> {
+                    NotificationHelper.showNotification(this, "✅ CHECK-IN SUCCESS", "Visitor: " + name + " has entered.");
                     Toast.makeText(this, "Check-in Successful", Toast.LENGTH_SHORT).show();
                     barcodeView.resume();
                 })
