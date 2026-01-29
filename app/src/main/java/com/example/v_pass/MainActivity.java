@@ -55,13 +55,15 @@ public class MainActivity extends AppCompatActivity {
             int id = item.getItemId();
 
             if (id == R.id.nav_home) {
-                // Already on Home, just close drawer
                 drawerLayout.closeDrawer(GravityCompat.START);
             } else if (id == R.id.nav_login) {
                 startActivity(new Intent(this, LoginActivity.class));
             } else if (id == R.id.nav_register) {
-                // Pointing to Visitor Registration
                 startActivity(new Intent(this, SignUpActivity.class));
+            } else if (id == R.id.nav_team) {
+                // Navigate to Team page with creative fade transition
+                startActivity(new Intent(this, TeamActivity.class));
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             } else if (id == R.id.nav_about) {
                 startActivity(new Intent(this, AboutUsActivity.class));
             }
@@ -76,10 +78,12 @@ public class MainActivity extends AppCompatActivity {
 
         cardVisitor.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         });
 
         cardGuard.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, GuardLoginActivity.class));
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         });
     }
 }

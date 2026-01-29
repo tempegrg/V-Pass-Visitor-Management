@@ -1,11 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.VPass" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
-        <item name="colorPrimary">@color/brand_primary</item>
+    <style name="Theme.VPass" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">#1A237E</item>
         <item name="colorPrimaryVariant">#121858</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorSecondary">@color/brand_secondary</item>
-        <item name="colorOnSecondary">@color/white</item>
-        <item name="android:statusBarColor">@color/brand_primary</item>
-        <item name="android:windowBackground">@color/bg_light</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+
+        <item name="colorSecondary">#1E88E5</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+
+        <item name="android:statusBarColor">#1A237E</item>
+        <item name="android:windowBackground">#F0F4F7</item>
+
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+    </style>
+
+    <style name="CircleImage">
+        <item name="cornerSize">50%</item>
     </style>
 </resources>

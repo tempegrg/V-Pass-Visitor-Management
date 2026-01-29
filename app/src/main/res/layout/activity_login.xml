@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         android:background="#F0F4F7">
 
-        <!-- Toolbar -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarLogin"
             android:layout_width="0dp"
@@ -25,7 +24,6 @@
             app:titleTextColor="#FFFFFF"
             app:navigationIcon="@android:drawable/ic_menu_sort_by_size" />
 
-        <!-- Background Gradient -->
         <View
             android:id="@+id/headerBackground"
             android:layout_width="match_parent"
@@ -33,7 +31,6 @@
             android:background="#1A237E"
             app:layout_constraintTop_toBottomOf="@id/toolbarLogin" />
 
-        <!-- Brand Section -->
         <LinearLayout
             android:id="@+id/brandingGroup"
             android:layout_width="wrap_content"
@@ -48,19 +45,18 @@
             <LinearLayout
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="#FFFFFF"
+                android:background="@android:color/transparent"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:clipToOutline="true"
-                android:outlineProvider="background"
-                android:padding="20dp"
+                android:padding="10dp"
                 android:layout_marginBottom="16dp">
 
                 <ImageView
                     android:id="@+id/ivAppLogo"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/indahsayang" />
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/indahsayang"
+                    android:scaleType="fitCenter" />
             </LinearLayout>
 
             <TextView
@@ -78,10 +74,9 @@
                 android:text="Visitor Portal"
                 android:textColor="#C5CAE9"
                 android:textSize="14sp"
-                android:layout_marginTop="4px"/>
+                android:layout_marginTop="4dp"/>
         </LinearLayout>
 
-        <!-- Login Card -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardLogin"
             android:layout_width="0dp"
@@ -89,6 +84,7 @@
             android:layout_marginHorizontal="24dp"
             app:cardCornerRadius="24dp"
             app:cardElevation="12dp"
+            app:cardBackgroundColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbarLogin"
             app:layout_constraintVertical_bias="0.7"
@@ -109,7 +105,7 @@
                     android:textColor="#1A237E"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="24px"/>
+                    android:layout_marginBottom="24dp"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -117,7 +113,6 @@
                     android:layout_height="wrap_content"
                     android:hint="Email Address"
                     app:boxStrokeColor="#1A237E"
-                    app:boxStrokeWidthFocused="2dp"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -129,9 +124,10 @@
                         android:id="@+id/etEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="your@email.com"
                         android:inputType="textEmailAddress"
-                        android:textSize="16sp"/>
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:padding="16dp"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Space android:layout_width="match_parent" android:layout_height="16dp" />
@@ -142,7 +138,6 @@
                     android:layout_height="wrap_content"
                     android:hint="Password"
                     app:boxStrokeColor="#1A237E"
-                    app:boxStrokeWidthFocused="2dp"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -156,9 +151,10 @@
                         android:id="@+id/etPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter password"
                         android:inputType="textPassword"
-                        android:textSize="16sp"/>
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:padding="16dp"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
@@ -188,7 +184,6 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Footer -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -198,7 +193,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="16px"/>
+            android:layout_marginBottom="16dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

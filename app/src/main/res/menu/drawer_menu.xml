@@ -18,9 +18,23 @@
             android:title="Register" />
 
         <item
+            android:id="@+id/nav_team"
+            android:icon="@android:drawable/ic_menu_myplaces"
+            android:title="Meet the Team" />
+
+        <item
             android:id="@+id/nav_about"
             android:icon="@android:drawable/ic_menu_info_details"
             android:title="About Us" />
     </group>
+
+    <item android:title="Account">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@android:drawable/ic_menu_close_clear_cancel"
+                android:title="Exit" />
+        </menu>
+    </item>
 
 </menu>

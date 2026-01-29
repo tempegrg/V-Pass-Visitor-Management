@@ -1,6 +1,7 @@
 package com.example.v_pass;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -8,6 +9,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,17 +45,25 @@ public class LoginActivity extends AppCompatActivity {
         // 2. Sidebar Navigation logic
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
+
             if (id == R.id.nav_home) {
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
             } else if (id == R.id.nav_register) {
                 startActivity(new Intent(this, SignUpActivity.class));
                 finish();
+            } else if (id == R.id.nav_team) {
+                // REDIRECT TO TEAM PAGE with fade transition
+                startActivity(new Intent(this, TeamActivity.class));
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             } else if (id == R.id.nav_about) {
                 startActivity(new Intent(this, AboutUsActivity.class));
             } else if (id == R.id.nav_login) {
                 drawerLayout.closeDrawer(GravityCompat.START);
+            } else if (id == R.id.nav_logout) {
+                finishAffinity();
             }
+
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });

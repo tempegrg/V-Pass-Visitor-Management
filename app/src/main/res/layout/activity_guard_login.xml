@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="#F0F4F7">
 
-    <!-- Background Gradient -->
     <View
         android:id="@+id/headerBackground"
         android:layout_width="match_parent"
@@ -14,8 +13,8 @@
         android:background="#1A237E"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Brand Section -->
     <LinearLayout
+        android:id="@+id/brandingGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -28,19 +27,16 @@
         <LinearLayout
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="#FFFFFF"
+            android:background="@android:color/transparent"
             android:gravity="center"
             android:orientation="vertical"
-            android:clipToOutline="true"
-            android:outlineProvider="background"
-            android:padding="16dp"
             android:layout_marginBottom="16dp">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@android:drawable/ic_lock_idle_lock"
-                app:tint="#1A237E" />
+                app:tint="#FFFFFF" />
         </LinearLayout>
 
         <TextView
@@ -61,7 +57,6 @@
             android:layout_marginTop="4dp"/>
     </LinearLayout>
 
-    <!-- Login Card -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/loginCard"
         android:layout_width="0dp"
@@ -69,6 +64,7 @@
         android:layout_marginHorizontal="24dp"
         app:cardCornerRadius="28dp"
         app:cardElevation="16dp"
+        app:cardBackgroundColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.65"
@@ -97,7 +93,6 @@
                 android:layout_height="wrap_content"
                 android:hint="Guard Email"
                 app:boxStrokeColor="#1A237E"
-                app:boxStrokeWidthFocused="2dp"
                 app:boxCornerRadiusBottomEnd="12dp"
                 app:boxCornerRadiusBottomStart="12dp"
                 app:boxCornerRadiusTopEnd="12dp"
@@ -109,9 +104,10 @@
                     android:id="@+id/etGuardEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="example@vpass.com"
                     android:inputType="textEmailAddress"
-                    android:textSize="16sp"/>
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:padding="16dp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <Space android:layout_width="match_parent" android:layout_height="16dp" />
@@ -122,7 +118,6 @@
                 android:layout_height="wrap_content"
                 android:hint="Password"
                 app:boxStrokeColor="#1A237E"
-                app:boxStrokeWidthFocused="2dp"
                 app:boxCornerRadiusBottomEnd="12dp"
                 app:boxCornerRadiusBottomStart="12dp"
                 app:boxCornerRadiusTopEnd="12dp"
@@ -136,9 +131,10 @@
                     android:id="@+id/etGuardPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter password"
                     android:inputType="textPassword"
-                    android:textSize="16sp"/>
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:padding="16dp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
@@ -157,7 +153,6 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Security Notice -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -169,15 +164,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="24dp" />
-
-    <!-- Bottom Decoration -->
-    <View
-        android:layout_width="120dp"
-        android:layout_height="4dp"
-        android:background="#1E88E5"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/loginCard"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

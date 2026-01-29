@@ -37,6 +37,8 @@
         <activity android:name=".QRActivity" android:exported="false" />
         <activity android:name=".AboutUsActivity" android:exported="false" />
 
+        <activity android:name=".TeamActivity" android:exported="false" />
+
         <activity android:name=".GuardLoginActivity" android:exported="false" />
         <activity android:name=".GuardActivity" android:exported="false" />
         <activity
