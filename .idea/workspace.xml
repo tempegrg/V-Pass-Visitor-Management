@@ -98,7 +98,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\Aina\.android\avd\Medium_Phone_2.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\user\.android\avd\Pixel_6.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -463,7 +463,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769669921418</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Updated Part UI">
+      <option name="closed" value="true" />
+      <created>1769685879598</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1769685879598</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -504,12 +512,12 @@
       <map>
         <entry key="com.example.v_pass">
           <value>
-            <CheckInfo lastCheckTimestamp="1769594417144" />
+            <CheckInfo lastCheckTimestamp="1769685901745" />
           </value>
         </entry>
         <entry key="com.example.v_pass.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1769594417138" />
+            <CheckInfo lastCheckTimestamp="1769685901746" />
           </value>
         </entry>
       </map>
