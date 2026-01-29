@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView; // Added this import
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -12,6 +13,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     EditText etEmail, etPassword;
     Button btnSignUp;
+    TextView tvGoToLogin; // 1. Declare the TextView
     FirebaseAuth mAuth;
 
     @Override
@@ -23,6 +25,14 @@ public class SignUpActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etSignUpEmail);
         etPassword = findViewById(R.id.etSignUpPassword);
         btnSignUp = findViewById(R.id.btnSignUp);
+        tvGoToLogin = findViewById(R.id.tvGoToLogin); // 2. Link it to the XML ID
+
+        // 3. Set the Click Listener to make it work
+        tvGoToLogin.setOnClickListener(v -> {
+            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish(); // Optional: close sign up so back button doesn't loop here
+        });
 
         btnSignUp.setOnClickListener(v -> {
             String email = etEmail.getText().toString().trim();
@@ -35,16 +45,10 @@ public class SignUpActivity extends AppCompatActivity {
 
             mAuth.createUserWithEmailAndPassword(email, pass)
                     .addOnSuccessListener(authResult -> {
-                        // 1. Firebase automatically logs the user in, so we MUST sign them out immediately
                         FirebaseAuth.getInstance().signOut();
-
                         Toast.makeText(this, "Account Created! Please login now.", Toast.LENGTH_LONG).show();
-
-                        // 2. Redirect to Login Activity
                         Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                         startActivity(intent);
-
-                        // 3. Close SignUpActivity so they can't go back
                         finish();
                     })
                     .addOnFailureListener(e -> {

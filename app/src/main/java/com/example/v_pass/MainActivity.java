@@ -9,7 +9,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        // 3. Handle Back Button (Tutup drawer kalau terbuka)
+        // 3. Handle Back Button (Close drawer if open)
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -53,26 +52,32 @@ public class MainActivity extends AppCompatActivity {
         // 4. Sidebar Menu Logic
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
-            if (id == R.id.nav_login) {
+
+            if (id == R.id.nav_home) {
+                // Already on Home, just close drawer
+                drawerLayout.closeDrawer(GravityCompat.START);
+            } else if (id == R.id.nav_login) {
                 startActivity(new Intent(this, LoginActivity.class));
             } else if (id == R.id.nav_register) {
+                // Pointing to Visitor Registration
                 startActivity(new Intent(this, SignUpActivity.class));
+            } else if (id == R.id.nav_about) {
+                startActivity(new Intent(this, AboutUsActivity.class));
             }
+
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
 
-        // 5. Portal Buttons Logic (Pengasingan Utama)
+        // 5. Portal Buttons
         btnVisitorEntry = findViewById(R.id.btnVisitorEntry);
         btnGuardEntry = findViewById(R.id.btnGuardEntry);
 
         btnVisitorEntry.setOnClickListener(v -> {
-            // Pergi ke Login Biasa (Ada Sign Up)
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         });
 
         btnGuardEntry.setOnClickListener(v -> {
-            // Pergi ke Login Guard (Tiada Sign Up)
             startActivity(new Intent(MainActivity.this, GuardLoginActivity.class));
         });
     }
