@@ -29,12 +29,13 @@ public class GuardScanActivity extends AppCompatActivity {
         barcodeView = findViewById(R.id.barcodeScanner);
         btnBack = findViewById(R.id.btnBack);
 
-        // --- TAMBAHAN UNTUK LAJUKAN SCAN ---
-        CameraSettings settings = new CameraSettings();
-        settings.setRequestedCameraId(0); // Guna kamera belakang
-        settings.setAutoFocusEnabled(true); // Paksa auto-focus sentiasa ON
-        barcodeView.getBarcodeView().setCameraSettings(settings);
-        // ------------------------------------
+        com.journeyapps.barcodescanner.camera.CameraSettings settings = new com.journeyapps.barcodescanner.camera.CameraSettings();
+
+        settings.setRequestedCameraId(0);
+
+        settings.setAutoFocusEnabled(true);
+
+        barcodeView.setCameraSettings(settings);
 
         String dbUrl = "https://v-pass-d85c7-default-rtdb.firebaseio.com/";
         visitorRef = FirebaseDatabase.getInstance(dbUrl).getReference("visitors");
