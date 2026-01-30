@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,11 +38,18 @@ public class QRActivity extends AppCompatActivity {
         });
 
         try {
-            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-            Bitmap bitmap = barcodeEncoder.encodeBitmap(qrData, BarcodeFormat.QR_CODE, 500, 500);
-            ivQR.setImageBitmap(bitmap);
+            if (qrData != null && !qrData.isEmpty()) {
+                BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+                Bitmap bitmap = barcodeEncoder.encodeBitmap(qrData, BarcodeFormat.QR_CODE, 500, 500);
+                ivQR.setImageBitmap(bitmap);
+            } else {
+                tvName.setText("Error: No Data Received");
+                Toast.makeText(this, "QR Data is empty!", Toast.LENGTH_SHORT).show();
+            }
         } catch (Exception e) {
+            Log.e("QR_ERROR", "QR Generation Failed:" + e.getMessage());
             e.printStackTrace();
+            Toast.makeText(this, "Failed to generate QR Code", Toast.LENGTH_SHORT).show();
         }
     }
 }

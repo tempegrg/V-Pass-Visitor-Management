@@ -9,7 +9,7 @@
     <View
         android:id="@+id/headerBackground"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="300dp"
         android:background="#1A237E"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,78 +24,78 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <ImageView
-                android:id="@+id/ivAppLogo"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical"
                 android:layout_marginTop="20dp"
-                android:src="@drawable/indahsayang"
-                android:contentDescription="Indah Sayang Logo" />
+                android:layout_marginBottom="30dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Visitor Entry"
-                android:textColor="#FFFFFF"
-                android:textSize="28sp"
-                android:fontFamily="sans-serif-black"
-                android:layout_marginTop="12dp"
-                android:layout_gravity="center" />
+                <ImageView
+                    android:id="@+id/ivAppLogo"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/indahsayang"
+                    android:contentDescription="Logo" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Secure Registration Portal"
-                android:textColor="#BDBDBD"
-                android:textSize="14sp"
-                android:letterSpacing="0.1"
-                android:layout_gravity="center"
-                android:layout_marginBottom="25dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VISITOR ENTRY"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:fontFamily="sans-serif-black"
+                    android:letterSpacing="0.1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Secure Registration Portal"
+                    android:textColor="#BBFFFFFF"
+                    android:textSize="12sp"
+                    android:letterSpacing="0.1" />
+            </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="28dp"
                 app:cardElevation="12dp"
-                app:strokeWidth="0dp"
                 app:cardBackgroundColor="#FFFFFF">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="30dp">
+                    android:padding="24dp">
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Full Name"
-                        app:boxStrokeColor="#1A237E"
-                        app:hintTextColor="#1A237E"
+                        app:startIconDrawable="@android:drawable/ic_menu_edit"
                         app:boxCornerRadiusTopStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusBottomEnd="12dp">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etVisitorName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textPersonName"
-                            android:textColor="#212121" />
+                            android:inputType="textPersonName" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <Space android:layout_width="match_parent" android:layout_height="16dp"/>
+                    <Space android:layout_width="match_parent" android:layout_height="12dp"/>
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="IC / Passport Number"
+                        app:startIconDrawable="@android:drawable/ic_dialog_info"
                         app:boxCornerRadiusTopStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusBottomEnd="12dp">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etVisitorIC"
@@ -104,16 +104,15 @@
                             android:inputType="text" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <Space android:layout_width="match_parent" android:layout_height="16dp"/>
+                    <Space android:layout_width="match_parent" android:layout_height="12dp"/>
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Phone Number"
+                        app:startIconDrawable="@android:drawable/ic_menu_call"
                         app:boxCornerRadiusTopStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusBottomEnd="12dp">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etPhone"
@@ -122,16 +121,15 @@
                             android:inputType="phone" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <Space android:layout_width="match_parent" android:layout_height="16dp"/>
+                    <Space android:layout_width="match_parent" android:layout_height="12dp"/>
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Vehicle Plate Number"
+                        android:hint="Vehicle Plate"
+                        app:startIconDrawable="@android:drawable/ic_menu_directions"
                         app:boxCornerRadiusTopStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusBottomEnd="12dp">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etVehicle"
@@ -140,7 +138,7 @@
                             android:inputType="textCapCharacters" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <Space android:layout_width="match_parent" android:layout_height="16dp"/>
+                    <Space android:layout_width="match_parent" android:layout_height="12dp"/>
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -148,8 +146,6 @@
                         android:layout_height="wrap_content"
                         android:hint="Purpose of Visit"
                         app:boxCornerRadiusTopStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusBottomEnd="12dp">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etPurpose"
@@ -162,43 +158,24 @@
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnGenerateQR"
                         android:layout_width="match_parent"
-                        android:layout_height="64dp"
-                        android:layout_marginTop="32dp"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="24dp"
                         android:text="GENERATE VISITOR QR"
-                        android:textSize="16sp"
                         android:textStyle="bold"
-                        android:letterSpacing="0.05"
                         app:cornerRadius="16dp"
-                        android:backgroundTint="#1E88E5"
-                        app:elevation="4dp" />
-
-                    <TextView
-                        android:id="@+id/tvGoToLogin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#1E88E5"
-                        android:textSize="14sp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
-                        android:padding="5dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:background="?attr/selectableItemBackground" />
+                        android:backgroundTint="#1A237E" />
 
                     <TextView
                         android:id="@+id/btnLogout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="BACK TO MAIN"
+                        android:text="BACK TO MAIN MENU"
                         android:textColor="#E53935"
-                        android:textSize="13sp"
+                        android:textSize="12sp"
                         android:textStyle="bold"
                         android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:padding="10dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:background="?attr/selectableItemBackground" />
+                        android:layout_marginTop="16dp"
+                        android:padding="10dp" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

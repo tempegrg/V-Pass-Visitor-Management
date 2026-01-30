@@ -29,24 +29,23 @@ public class GuardScanActivity extends AppCompatActivity {
         barcodeView = findViewById(R.id.barcodeScanner);
         btnBack = findViewById(R.id.btnBack);
 
-        // Standardizing the database URL
+        com.journeyapps.barcodescanner.camera.CameraSettings settings = new com.journeyapps.barcodescanner.camera.CameraSettings();
+
+        settings.setRequestedCameraId(0);
+
+        settings.setAutoFocusEnabled(true);
+
+        barcodeView.setCameraSettings(settings);
+
+        // Database initialization...
         String dbUrl = "https://v-pass-d85c7-default-rtdb.firebaseio.com/";
         visitorRef = FirebaseDatabase.getInstance(dbUrl).getReference("visitors");
         logRef = FirebaseDatabase.getInstance(dbUrl).getReference("entry_logs");
 
-        // 1. Handle "CANCEL SCAN" Button Click
+        // Click listeners...
         btnBack.setOnClickListener(v -> {
             barcodeView.pause();
-            finish(); // Closes the scanner and goes back to Guard Dashboard
-        });
-
-        // 2. Handle System Back Button (Modern Way)
-        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                barcodeView.pause();
-                finish();
-            }
+            finish();
         });
 
         barcodeView.decodeContinuous(callback);
