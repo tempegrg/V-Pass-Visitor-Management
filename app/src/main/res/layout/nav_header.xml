@@ -5,7 +5,8 @@
     android:background="#1A237E"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
         android:layout_width="64dp"
@@ -16,16 +17,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:text="V-PASS System"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:text="V-PASS Guard"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Indah Sayang Residential"
-        android:textColor="#BDBDBD"
-        android:textSize="14sp" />
-
+        android:text="vpass.support@indahsayang.com" />
 </LinearLayout>
